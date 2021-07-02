@@ -1,4 +1,4 @@
-package com.example.bootactiviti7.mediator;
+package com.example.bootactiviti7.design.mediator;
 
 /**
  * @author shaotianyou

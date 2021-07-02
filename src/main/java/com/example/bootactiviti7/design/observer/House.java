@@ -1,4 +1,4 @@
-package com.example.bootactiviti7.observer;
+package com.example.bootactiviti7.design.observer;
 
 import java.util.Observable;
 

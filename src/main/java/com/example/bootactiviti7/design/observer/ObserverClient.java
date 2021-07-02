@@ -1,6 +1,4 @@
-package com.example.bootactiviti7.observer;
-
-import org.junit.jupiter.api.Test;
+package com.example.bootactiviti7.design.observer;
 
 /**
  * @author shaotianyou

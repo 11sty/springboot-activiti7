@@ -1,7 +1,5 @@
 package com.example.bootactiviti7;
 
-import com.example.bootactiviti7.observer.House;
-import com.example.bootactiviti7.observer.HouseObserver;
 import com.example.bootactiviti7.util.SecurityUtil;
 import org.activiti.api.process.model.ProcessDefinition;
 import org.activiti.api.process.model.ProcessInstance;
