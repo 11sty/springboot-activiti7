@@ -21,3 +21,10 @@ spring:
     #流程定义文件存放目录
     process-definition-location-prefix: classpath:/processes/
 
+logging:
+  level:
+    org:
+      springframework:
+        boot:
+          autoconfigure:
+            logging: info

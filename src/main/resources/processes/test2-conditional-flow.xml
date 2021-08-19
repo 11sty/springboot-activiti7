@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="sample-diagram" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.8.1" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://bpmn.sourceforge.net/schemas/BPMN20.xsd">
+  <bpmn2:process id="Process_0mz86on" name="填写表单" processType="None" isClosed="false" isExecutable="true">
+    <bpmn2:startEvent id="StartEvent_1" name="开始">
+      <bpmn2:outgoing>Flow_1kb5o6f</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:sequenceFlow id="Flow_1kb5o6f" sourceRef="StartEvent_1" targetRef="Activity_1cwa5h6" />
+    <bpmn2:userTask id="Activity_1cwa5h6" name="填写表单" camunda:assignee="tom">
+      <bpmn2:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="FormField_0si1qq9" label="测试字段1" type="string" defaultValue="1" />
+          <camunda:formField id="FormField_224113p" label="测试字段2" type="string" defaultValue="2" />
+        </camunda:formData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Flow_1kb5o6f</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0a0oxoo</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:userTask id="Activity_1irc8ox" name="system审批结束" camunda:assignee="system">
+      <bpmn2:incoming>Flow_0kzaa0f</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0as4h3c</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:endEvent id="Event_0f11tef" name="system结束">
+      <bpmn2:incoming>Flow_0as4h3c</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Flow_0as4h3c" sourceRef="Activity_1irc8ox" targetRef="Event_0f11tef" />
+    <bpmn2:sequenceFlow id="Flow_0a0oxoo" sourceRef="Activity_1cwa5h6" targetRef="Gateway_0j2jsqk">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" />
+    </bpmn2:sequenceFlow>
+    <bpmn2:exclusiveGateway id="Gateway_0j2jsqk">
+      <bpmn2:incoming>Flow_0a0oxoo</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1mzzfgh</bpmn2:outgoing>
+      <bpmn2:outgoing>Flow_0kzaa0f</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:sequenceFlow id="Flow_1mzzfgh" sourceRef="Gateway_0j2jsqk" targetRef="Activity_0fq1ax1">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${FormField_224113p == '2'}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="Flow_0kzaa0f" sourceRef="Gateway_0j2jsqk" targetRef="Activity_1irc8ox">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${FormField_224113p != '2'}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:userTask id="Activity_0fq1ax1" name="jack审批后结束" camunda:assignee="jack">
+      <bpmn2:incoming>Flow_1mzzfgh</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0myr6mr</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:endEvent id="Event_0kmqsm1" name="jack结束">
+      <bpmn2:incoming>Flow_0myr6mr</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Flow_0myr6mr" sourceRef="Activity_0fq1ax1" targetRef="Event_0kmqsm1" />
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0mz86on">
+      <bpmndi:BPMNEdge id="Flow_0myr6mr_di" bpmnElement="Flow_0myr6mr">
+        <di:waypoint x="470" y="380" />
+        <di:waypoint x="612" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0kzaa0f_di" bpmnElement="Flow_0kzaa0f">
+        <di:waypoint x="210" y="405" />
+        <di:waypoint x="210" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1mzzfgh_di" bpmnElement="Flow_1mzzfgh">
+        <di:waypoint x="235" y="380" />
+        <di:waypoint x="370" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0a0oxoo_di" bpmnElement="Flow_0a0oxoo">
+        <di:waypoint x="210" y="310" />
+        <di:waypoint x="210" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0as4h3c_di" bpmnElement="Flow_0as4h3c">
+        <di:waypoint x="210" y="590" />
+        <di:waypoint x="210" y="662" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1kb5o6f_di" bpmnElement="Flow_1kb5o6f">
+        <di:waypoint x="210" y="148" />
+        <di:waypoint x="210" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="192" y="112" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="197" y="82" width="27" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0djl61i_di" bpmnElement="Activity_1cwa5h6">
+        <dc:Bounds x="160" y="230" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_104sdr8_di" bpmnElement="Activity_1irc8ox">
+        <dc:Bounds x="160" y="510" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0f11tef_di" bpmnElement="Event_0f11tef">
+        <dc:Bounds x="192" y="662" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="182" y="705" width="58" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1d2wota_di" bpmnElement="Gateway_0j2jsqk" isMarkerVisible="true">
+        <dc:Bounds x="185" y="355" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pyblq2_di" bpmnElement="Activity_0fq1ax1">
+        <dc:Bounds x="370" y="340" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0kmqsm1_di" bpmnElement="Event_0kmqsm1">
+        <dc:Bounds x="612" y="362" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="609" y="405" width="42" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

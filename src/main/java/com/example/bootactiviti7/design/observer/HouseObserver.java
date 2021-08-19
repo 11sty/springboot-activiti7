@@ -14,6 +14,14 @@ public class HouseObserver implements Observer {
     /** 观察器名称 */
     private String name;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public HouseObserver(String name) {
         this.name = name;
     }
