@@ -17,10 +17,13 @@ import org.springframework.stereotype.Component;
 public class QueueAddFriendReceiver {
     private static final Logger log = LoggerFactory.getLogger(QueueAddFriendReceiver.class);
 
-    @JmsListener(destination = "QUEUE_RECEIVE_ADD_FIREND", containerFactory = "MyjmsQueueListener") //红色为监听的队列名称
+    /**
+     * 红色为监听的队列名称
+     */
+    @JmsListener(destination = "QUEUE_RECEIVE_ADD_FIREND", containerFactory = "MyjmsQueueListener")
     public void receiveAddFriend(Student student) {
         System.out.println("啦啦啦啦"+student.toString());
-        log.error("receiveAddFriend Exception:{}");
+        log.error("{}", "receiveAddFriend Exception:{}");
 
 
     }

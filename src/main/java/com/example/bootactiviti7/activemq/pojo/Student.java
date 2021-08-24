@@ -1,5 +1,7 @@
 package com.example.bootactiviti7.activemq.pojo;
 
+import java.io.Serializable;
+
 /**
  * @author shaotianyou
  * @version 1.0.0
@@ -7,7 +9,7 @@ package com.example.bootactiviti7.activemq.pojo;
  * @Description TODO
  * @createTime 2021年08月23日 10:16:00
  */
-public class Student {
+public class Student implements Serializable {
     private String name;
 
     private Integer age;

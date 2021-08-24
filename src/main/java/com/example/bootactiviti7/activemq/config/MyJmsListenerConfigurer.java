@@ -6,6 +6,7 @@ import org.apache.activemq.RedeliveryPolicy;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.connection.CachingConnectionFactory;
@@ -23,6 +24,7 @@ import javax.jms.Destination;
  */
 @Configuration
 @EnableJms
+@Primary
 public class MyJmsListenerConfigurer {
 
     @Value("${spring.activemq.broker-url}")
@@ -50,7 +52,6 @@ public class MyJmsListenerConfigurer {
             Destination destination = session.createQueue(destinationName);
             return destination;
         };
-
         factory.setDestinationResolver(destinationResolver);
         return factory;
     }
@@ -71,7 +72,7 @@ public class MyJmsListenerConfigurer {
     }
 
     @Bean
-    public ConnectionFactory jmsConnectionFactory(){
+    public ConnectionFactory jmsConnectionFactory() {
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
 
         connectionFactory.setBrokerURL(activeMQURL);
